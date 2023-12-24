@@ -1,0 +1,1 @@
+<h4>Register Berhasil<br>Silahkan <a href="app://www.google.com/help">kembali ke aplikasi</a> untuk login</h4>
