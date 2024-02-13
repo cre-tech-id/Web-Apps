@@ -16,6 +16,7 @@
     <li>
       <a href="#medis">Medis</a>
       <ul>
+        <li><a href="#about-medis-apps">About</a></li>
         <li><a href="#medis-apps-built-with">Built With</a></li>
         <li><a href="#screenshot-medis-apps">Screenshot</a></li>
       </ul>
@@ -23,13 +24,15 @@
     <li>
       <a href="#pembayaran-pam">Pembayaran PAM</a>
       <ul>
+        <li><a href="#about-pembayaran-pam">About</a></li>
         <li><a href="#pembayaran-pam-built-with">Built With</a></li>
         <li><a href="#screenshot-pembayaran-pam">Screenshot</a></li>
       </ul>
     </li>
     <li>
-      <a href="#penjadwalan-mata-kuliah">Pembayaran PAM</a>
+      <a href="#penjadwalan-mata-kuliah">Penjadwalan Mata Kuliah</a>
       <ul>
+        <li><a href="#about-penjadwalan-mata-kuliah">About</a></li>
         <li><a href="#penjadwalan-mata-kuliah-built-with">Built With</a></li>
         <li><a href="#screenshot-penjadwalan-mata-kuliah">Screenshot</a></li>
       </ul>
@@ -37,6 +40,7 @@
     <li>
       <a href="#penjualan-batik">Penjualan Batik</a>
       <ul>
+        <li><a href="#about-penjualan-batik">About</a></li>
         <li><a href="#penjualan-batik-built-with">Built With</a></li>
         <li><a href="#screenshot-penjualan-batik">Screenshot</a></li>
       </ul>
@@ -44,6 +48,7 @@
     <li>
       <a href="#web-seni">Web Seni</a>
       <ul>
+        <li><a href="#about-web-seni">About</a></li>
         <li><a href="#web-seni-built-with">Built With</a></li>
         <li><a href="#screenshot-web-seni">Screenshot</a></li>
       </ul>
@@ -51,6 +56,7 @@
     <li>
       <a href="#wedding-organizer">Wedding Organizer</a>
       <ul>
+        <li><a href="#about-wedding-organizer">About</a></li>
         <li><a href="#wedding-organizer-built-with">Built With</a></li>
         <li><a href="#screenshot-wedding-organizer">Screenshot</a></li>
       </ul>
@@ -61,7 +67,9 @@
 
 ## Medis
 
-This is Create, Read, Update, & Delete (CRUD) Apps that use for processing data which will be used for <a href="https://github.com/cre-tech-id/Mobile-Apps">Mobile Medis Apps</a>.
+### About Medis Apps 
+
+Medis Apps is simply Create, Read, Update, & Delete (CRUD) Apps that use for processing data about health content, which will be used for <a href="https://github.com/cre-tech-id/Mobile-Apps">Mobile Medis Apps</a>. So Mobile Medis Apps can showing contents based on the data that inputed by user.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -69,24 +77,36 @@ This is Create, Read, Update, & Delete (CRUD) Apps that use for processing data 
 
 * [![Codeigniter][codeigniter.com]][codeigniter-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![PHP][PHP.com]][PHP-url](version - 7.4)
+* [![PHP][PHP.com]][PHP-url]
 * [![MySQL][MySQL.com]][MySQL-url]
 * [![JQuery][JQuery.com]][JQuery-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Screenshot Medis Apps
-
-* Login Page
-  ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/81fc78ab-ce85-48a3-ac29-1e12c7ea4922)
 * Register Page
+  <br>Register Page contain 3 field, Email, name and Password. Data that already submitted can be used for login user in login page.
   ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/14628f72-986a-46c8-9dae-907757ed90b4)
+  
+* Login Page
+  <br>Login Page contain 2 field, Email and Password. Which is email and password must be match the registration data. If not registered, user can click sign up button for registration.
+  ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/81fc78ab-ce85-48a3-ac29-1e12c7ea4922)
+  
 * View Data
+  <br>This is first view after user successed login. This view contain content that already inputed by user, if user not inputed yet, table only show nothing. For add the data user must click the "Tambah Data" Button.
   ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/df0a484d-4189-4a25-8dd3-03c2bece1663)
+  
 * Add Data
+  <br>If user clicked "Tambah Data" Button in previous page this form will show. Fill the form up. Title(judul), description(deskripsi) must be filled. If the content don't need image, just leave it. After that user can click "Simpan" for saving data, or click "Kembali"(back) if user want to back to previous page.
   ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/719f28f2-8b7c-4551-9106-7225ceb63d2b)
+  
 * Update Data
+  <br>If user want to update the data just click the button edit(pencil logo), and this is the page for updating data. This form include 2 field, title(judul) and description(deskripsi) that contain data that user inputed already. After user already done updating data, user can click "Simpan" for saving data, or click "Kembali"(back) if user want to back to previous page.
   ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/98c0aeb8-09be-4744-b3df-3f377e5b5456)
+  
+* Delete Data
+  <br>Deleting the can be done in a simple way. Just choose what content user want to delete by click the trash button.
+![WhatsApp Image 2024-02-13 at 12 59 49 (1)](https://github.com/cre-tech-id/Web-Apps/assets/56110716/f75f2cc1-5d5d-4c56-ad5c-72e1a0c6a2ca)
 
 <!-- End Medis Section -->
 
@@ -95,6 +115,7 @@ This is Create, Read, Update, & Delete (CRUD) Apps that use for processing data 
 
 ## Pembayaran PAM
 
+### About Pembayaran PAM
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Pembayaran PAM Built With
@@ -111,7 +132,7 @@ This is Create, Read, Update, & Delete (CRUD) Apps that use for processing data 
 
 <!-- Start Penjadwalan Mata Kuliah Section -->
 ## Penjadwalan Mata Kuliah
-
+### About Penjadwalan Mata Kuliah
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -131,6 +152,7 @@ This is Create, Read, Update, & Delete (CRUD) Apps that use for processing data 
 
 <!-- Start Penjualan Batik Section -->
 ## Penjualan Batik
+### About Penjualan Batik
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -150,6 +172,7 @@ This is Create, Read, Update, & Delete (CRUD) Apps that use for processing data 
 
 <!-- Start Web Seni Section -->
 ## Web Seni
+### About Web Seni
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -169,6 +192,7 @@ This is Create, Read, Update, & Delete (CRUD) Apps that use for processing data 
 
 <!-- Start Web Seni Section -->
 ## Wedding Organizer
+### About Wedding Organizer
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
