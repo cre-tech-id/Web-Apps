@@ -27,13 +27,13 @@
 
 ## Medis
 
-### About Medis Apps 
+### About
 
 Medis Web Apps is a simple web application that allows users to manage information related to the health and care of hemodialysis patients. This application is designed to facilitate patient data management and provide a useful source of information about hemodialysis procedures and related treatments. which the data already inputted will be used for <a href="https://github.com/cre-tech-id/Mobile-Apps/tree/master/Medis-Apps">Mobile Medis Apps</a>.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Medis Apps Built With
+### Built With
 
 * [![Codeigniter][codeigniter.com]][codeigniter-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
