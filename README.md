@@ -97,6 +97,7 @@ Medis Web Apps is a simple web application that allows users to manage informati
 ## Web Seni
 ### About Web Seni
 
+Web Seni is a comprehensive web application designed to serve as a platform for artists to manage data related to artwork rentals, sales of art tools, and for administrators to process user data. So this application has 3 view: an artist dashboard, an admin dashboard, and a user page for viewing artwork available for rent and art tools for sale. It also facilitates real-time chat between users and artists. For payment processing is handled through the Midtrans payment gateway.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -106,7 +107,7 @@ Medis Web Apps is a simple web application that allows users to manage informati
 <!-- Start Web Seni Section -->
 ## Wedding Organizer
 ### About Wedding Organizer
-
+Wedding Organizer is web application designed to serve as a platform for wedding organizer. The website features an admin dashboard for monitoring user data and data inputted by wedding organizer providers. Additionally, there's a provider dashboard to process wedding organizer package data, order data, and event data. The data entered by the wedding organizer providers will be displayed on the associated <a href="https://github.com/cre-tech-id/Mobile-Apps/tree/master/Wedding-Oraganizer">Mobile Wedding Organizer</a>.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
