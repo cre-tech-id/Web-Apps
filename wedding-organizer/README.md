@@ -44,6 +44,79 @@ Wedding Organizer is web application designed to serve as a platform for wedding
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Screenshot
+#### Admin Dashboard
+
+* Register Page
+  <br>Register Page contain 3 field, name, email, password, address, detail address, phone number, description of wedding organizer, and profile photo. Data that already submitted can be used for login user in login page.
+  ![PhotoGrid_Site_1709312761861](https://github.com/cre-tech-id/Web-Apps/assets/56110716/7f557405-50da-4ffe-87ad-27ae0ff3173f)
+  
+* Login Page
+Login Page contain 2 field, Email and Password. Which is email and password must be match the registration data. If user not registered yet, user can click sign up button for registration.
+![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/b052bb81-8b8e-43eb-a20a-9dc65c795a82)
+
+* Admin - Dashboard
+  In Admin dashboard show information about total administrator(total admin), total wedding organizer(total penyedia), total users(total user), and total package of wedding organizer.
+  ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/1d7f43bb-af0e-438c-a9d0-6879c8914a03)
+  
+* Admin - Admin
+  This page is for viewing data of admin, and data also can be update and delete. This menu also had add data button for add data admin.
+  ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/8588cc6e-07f9-4d1a-aec1-3b528b4c74ee)
+
+* Admin - Add Data Admin
+  If admin want to add more admin member, click button "New Admin" in previous page (Admin - Admin). There are several form columns that must be filled in, they are Nama(name), email, password, Nomor Hp(phone number), and Foto Profil(profile photo). And after form filled in correctly, click Simpan(save) button to save data.
+  ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/21436e6c-7118-4abe-b1ea-cbb616310bf8)
+  
+* Admin - Update Data Admin
+  If user want to update the data just click the button edit(pencil & user icon) in previous page (Admin - Admin). This form include 4 field, Nama(name), Email, Nomor Hp(phone number), and Foto Profil(profile photo) which is contain data that user inputed already. After user already done updating data, user can click "Simpan" for saving data.
+  ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/0cec3d95-c2d8-4d0f-ac1c-d5741131e49e)
+  
+* Admin - Delete Data Admin
+  To delete data just choose data that user want to delete by click the trash button, that located next to edit button in Admin - Admin page.
+  ![WhatsApp Image 2024-03-02 at 00 59 19](https://github.com/cre-tech-id/Web-Apps/assets/56110716/69780678-7c18-463e-bdd0-3fdc384c399f)
+  
+* Admin - Penyedia(Wedding Organizer)
+  This page is for viewing data of wedding organizer. Admin cannot update or add data of wedding organizer, just can delete the data and accept or reject wedding organizer.
+  ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/a60c0678-3d85-4b9d-b740-0c263cf4cbed)
+  
+* Admin - Confirm Penyedia (wedding organizer)
+  After wedding organizer registered, admin must review data that wedding organizer filled in form. After that, if data is    valid click button "Terima" for accept wedding organizer, and click button "Tolak" if not.
+  ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/b5e9a8d2-fc2c-4701-939c-7987543bf9e0)
+
+* Admin - Delete Data Penyedia (wedding organizer)
+  To delete data just choose data that user want to delete by click the trash button, that located in Admin - Penyedia(Wedding Organizer).
+  ![WhatsApp Image 2024-03-02 at 01 15 31](https://github.com/cre-tech-id/Web-Apps/assets/56110716/7debff2d-e8ad-4c7a-9995-738bc0b676f0)
+
+* Admin - User
+  This page is show user that already registered in <a href="https://github.com/cre-tech-id/Mobile-Apps/tree/master/Wedding-Oraganizer">Mobile Application</a>. And in this page only contain delete button.
+  ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/487c5985-274e-4aab-8984-57a1c086747d)
+  
+* Admin - Delete User
+  To delete data just choose data that user want to delete by click the trash button, that located in Admin - User.
+  ![WhatsApp Image 2024-03-02 at 01 23 28](https://github.com/cre-tech-id/Web-Apps/assets/56110716/49130153-b0cc-4945-b37d-2bf8b7f9276a)
+
+* Admin - Paket(package)
+  This page contains available packages that have been inputed by the wedding organizer. For admin, in this page only contain delete button.
+![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/d52574eb-db56-4c6e-8973-28275c4776c4)
+
+* Admin - Delete Paket
+  To delete data just choose data that user want to delete by click the trash button, that located in Admin - Paket(package).
+  ![WhatsApp Image 2024-03-02 at 01 34 11](https://github.com/cre-tech-id/Web-Apps/assets/56110716/db2c2a8c-ab8c-4b1c-86df-ee22a80be715)
+
+* Admin - Event
+  This page is only show events event to be held by Wedding Organizer.
+  ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/ed19b20f-19b4-43b3-9a97-86dba72d1df3)
+
+
+
+  
+
+
+
+
+
+
+
+
 
 
 
