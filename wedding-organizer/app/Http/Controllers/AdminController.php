@@ -23,7 +23,7 @@ class AdminController extends Controller
     }
 
     public function tambahDataAdmin(Request $request)
-    {   
+    {
         $name = 'image'.'-'.time().'.'.$request->file('gambar')->getClientOriginalExtension();
         $path = $request->file('gambar')->storeAs('public/upload/profile/',$name);
 
@@ -31,12 +31,11 @@ class AdminController extends Controller
         $admin->nama = $request->input('nama_admin');
         $admin->email = $request->input('email');
         $admin->password = bcrypt($request->input('password'));
-        $admin->alamat = $request->input('alamat');
         $admin->no_hp = $request->input('no_hp');
         $admin->role_id = $request->input('role');
         $admin->gambar = $name;
         $admin->save();
-        
+
         return redirect('/admin');
     }
 
@@ -65,7 +64,6 @@ class AdminController extends Controller
         dataPengguna::where('id',$request->id)->update([
             'nama' => $request->username,
             'email' => $request->email,
-            'alamat' => $request->alamat,
             'no_hp' => $request->no_hp,
             // 'password' => bcrypt($request->password),
             'role_id' => $request->role,
@@ -75,7 +73,6 @@ class AdminController extends Controller
         dataPengguna::where('id',$request->id)->update([
             'nama' => $request->username,
             'email' => $request->email,
-            'alamat' => $request->alamat,
             'no_hp' => $request->no_hp,
             // 'password' => bcrypt($request->password),
             'role_id' => $request->role

@@ -12,7 +12,7 @@ class SessionsController extends Controller
 {
     public function create()
     {
-        
+
         return view('session.login-session');
     }
 
@@ -20,7 +20,7 @@ class SessionsController extends Controller
     {
         $attributes = request()->validate([
             'email'=>'required',
-            'password'=>'required' 
+            'password'=>'required'
         ]);
 
         if(Auth::attempt($attributes))
@@ -37,7 +37,7 @@ class SessionsController extends Controller
             return back()->withErrors(['email'=>'Email or password invalid.']);
         }
     }
-    
+
     public function destroy()
     {
         Session::forget('role');

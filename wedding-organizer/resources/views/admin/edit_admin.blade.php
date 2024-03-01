@@ -29,13 +29,6 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="alamat">Alamat</label>
-                        <input type="text" class="form-control" placeholder="Alamat" name="alamat" id="alamat" aria-label="Email" aria-describedby="email-addon" value="{{ $a->alamat }}">
-                        @error('alamat')
-                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
                         <label for="no_hp">Nomor Hp</label>
                         <input type="text" class="form-control" placeholder="Nomor Hp" name="no_hp" id="no_hp" aria-label="Email" aria-describedby="email-addon" value="{{ $a->no_hp }}">
                         @error('no_hp')

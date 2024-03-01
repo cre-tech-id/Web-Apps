@@ -7,14 +7,33 @@ use App\Models\Rating;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
 use Session;
 
 class RegisterController extends Controller
 {
     public function create()
     {
-        return view('session.register');
+        $kota = \Indonesia::findProvince(13, ['cities'])->cities->sortBy('name')->pluck('name', 'id');
+        $route_get_kecamatan = route('get.kecamatan');
+        $route_get_desa = route('get.desa');
+        return view('session.register', compact('kota', 'route_get_kecamatan', 'route_get_desa'));
     }
+
+    public function getKecamatan()
+    {
+        $kota_id = request('kota_id');
+        $kecamatan = \Indonesia::findCity($kota_id, ['districts'])->districts->sortBy('name')->pluck('name', 'id');
+        return view('session.list_kecamatan', compact('kecamatan'));
+    }
+
+    public function getDesa()
+    {
+        $kecamatan_id = request('kecamatan_id');
+        $desa = \Indonesia::findDistrict($kecamatan_id, ['villages'])->villages->sortBy('name')->pluck('name', 'id');
+        return view('session.list_desa', compact('desa'));
+    }
+
 
     public function store(Request $request)
     {
@@ -22,18 +41,20 @@ class RegisterController extends Controller
             'nama' => ['required', 'max:50'],
             'email' => ['required', 'email', 'max:50', Rule::unique('users', 'email')],
             'password' => ['required', 'min:5', 'max:20'],
-            'jl' => ['required', 'min:5', 'max:20'],
-            'desa' => ['required', 'min:5', 'max:20'],
-            'kec' => ['required', 'min:5', 'max:20'],
-            'kota' => ['required', 'min:5', 'max:20'],
             'no_hp' => ['required', 'min:5', 'max:20'],
             'desc' => ['required'],
             'role_id' => ['required'],
         ]);
 
-        $alamat = "{$attributes['jl']}, {$attributes['desa']}, {$attributes['kec']}, {$attributes['kota']}";
+        $desa = $request->input('desa_id');
+        $kota = $request->input('kota');
+        $kecamatan = $request->input('kecamatan_id');
+        $detail = $request->input('jl');
         $attributes['password'] = bcrypt($attributes['password']);
-        $attributes['alamat'] = $alamat;
+        $attributes['desa'] = $desa;
+        $attributes['kecamatan'] = $kecamatan;
+        $attributes['kota'] = $kota;
+        $attributes['detail_alamat'] = $detail;
         if ($request->hasFile('gambar')) {
             $name = 'image' . '-' . time() . '.' . $request->file('gambar')->getClientOriginalExtension();
             $path = $request->file('gambar')->storeAs('public/upload/profile/', $name);
@@ -54,7 +75,10 @@ class RegisterController extends Controller
 
     public function userRegister()
     {
-        return view('session.register_user');
+        $kota = \Indonesia::findProvince(13, ['cities'])->cities->sortBy('name')->pluck('name', 'id');
+        $route_get_kecamatan = route('get.kecamatan');
+        $route_get_desa = route('get.desa');
+        return view('session.register_user', compact('kota', 'route_get_kecamatan', 'route_get_desa'));
     }
 
     public function doUserRegister(Request $request)
@@ -63,15 +87,20 @@ class RegisterController extends Controller
             'nama' => ['required', 'max:50'],
             'email' => ['required', 'email', 'max:50', Rule::unique('users', 'email')],
             'password' => ['required', 'min:5', 'max:20'],
-            'jl' => ['required', 'min:5', 'max:20'],
-            'desa' => ['required', 'min:5', 'max:20'],
-            'kec' => ['required', 'min:5', 'max:20'],
-            'kota' => ['required', 'min:5', 'max:20'],
             'no_hp' => ['required', 'min:5', 'max:20'],
             'role_id' => ['required'],
         ]);
-        $alamat = "{$attributes['jl']}, {$attributes['desa']}, {$attributes['kec']}, {$attributes['kota']}";
-        $attributes['alamat'] = $alamat;
+
+        $desa = $request->input('desa_id');
+        $kota = $request->input('kota');
+        $kecamatan = $request->input('kecamatan_id');
+        $detail = $request->input('jl');
+        $attributes['password'] = bcrypt($attributes['password']);
+        $attributes['desa'] = $desa;
+        $attributes['desc'] = '-';
+        $attributes['kecamatan'] = $kecamatan;
+        $attributes['kota'] = $kota;
+        $attributes['detail_alamat'] = $detail;
         if ($request->hasFile('gambar')) {
             $name = 'image' . '-' . time() . '.' . $request->file('gambar')->getClientOriginalExtension();
             $path = $request->file('gambar')->storeAs('public/upload/profile/', $name);
@@ -79,7 +108,6 @@ class RegisterController extends Controller
         } else {
             $attributes['gambar'] = 'default_profile.png';
         }
-        $attributes['password'] = bcrypt($attributes['password']);
         $user = User::create($attributes);
 
         return redirect('register-succes');

@@ -1,4 +1,5 @@
-<footer class="footer py-5">
+  <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+  <footer class="footer py-5">
     <div class="container">
       @if (!auth()->user() || \Request::is('static-sign-up'))
         <div class="row">
@@ -7,10 +8,11 @@
               Copyright © <script>
                 document.write(new Date().getFullYear())
               </script>
-              <a style="color: #252f40;" href="#" class="font-weight-bold ml-1">Wedding Organizer Tegal</a>
+              <a style="color: #252f40;" href="#" class="font-weight-bold ml-1">Cretech</a>
             </p>
           </div>
         </div>
       @endif
     </div>
   </footer>
+  <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->

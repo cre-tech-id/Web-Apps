@@ -18,9 +18,13 @@ class CreateUsersTable extends Migration
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('alamat');
+            $table->string('kota');
+            $table->string('kecamatan');
+            $table->string('desa');
+            $table->string('detail_alamat');
             $table->string('no_hp');
             $table->string('gambar');
+            $table->string('desc');
             $table->unsignedBigInteger('role_id');
             $table->enum('is_verify',['0','1','2'])->default('0');
             $table->rememberToken();

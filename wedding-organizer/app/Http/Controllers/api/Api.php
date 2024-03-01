@@ -23,7 +23,10 @@ class Api extends Controller
         ->join(DB::raw('(select rating.penyedia_id, cast(sum(rating.rating)-5 as decimal(10,1))
         as totalrating, count(rating.rating)-1 as totaluser from rating inner join users on
         rating.penyedia_id = users.id GROUP by rating.penyedia_id)as t'),'t.penyedia_id', '=', 'users.id')
-        ->select('users.nama as penyedia', 'users.alamat', \DB::raw('SUBSTRING(no_hp, 2, 20) as no'), \DB::raw('case
+        ->join('indonesia_cities', 'indonesia_cities.id', '=', 'users.kota')
+        ->join('indonesia_districts', 'indonesia_districts.id', '=', 'users.kecamatan')
+        ->join('indonesia_villages', 'indonesia_villages.id', '=', 'users.desa')
+        ->select('users.nama as penyedia', DB::raw('concat(indonesia_cities.name, ", ",indonesia_districts.name, " ",indonesia_villages.name, " ", users.detail_alamat) as alamat'), \DB::raw('SUBSTRING(no_hp, 2, 20) as no'), \DB::raw('case
         when cast(t.totalrating/t.totaluser as decimal(10,2)) > 0 then cast(t.totalrating/t.totaluser as decimal(10,2))
         ELSE
         0
@@ -120,8 +123,11 @@ class Api extends Controller
 
             $user = User::where('email', $request->email)->first();
             $detail = DB::table('users')
-                        ->select( 'id','nama','alamat','no_hp as no', 'gambar')
-                        ->where('email', '=', $request->email)
+                        ->select('users.id','users.nama', 'users.is_verify', 'users.email', 'users.no_hp as no', 'users.gambar', 'users.desc', DB::raw('concat(indonesia_cities.name, ", ",indonesia_districts.name, " ",indonesia_villages.name, " ", users.detail_alamat) as alamat') )
+                        ->join('indonesia_cities', 'indonesia_cities.id', '=', 'users.kota')
+                        ->join('indonesia_districts', 'indonesia_districts.id', '=', 'users.kecamatan')
+                        ->join('indonesia_villages', 'indonesia_villages.id', '=', 'users.desa')
+                        ->where('users.email', '=', $request->email)
                         ->get();
 
             return response()->json([
@@ -153,8 +159,11 @@ class Api extends Controller
         ->join(DB::raw('(select rating.penyedia_id, cast(sum(rating.rating)-5 as decimal(10,1))
         as totalrating, count(rating.rating)-1 as totaluser from rating inner join users on
         rating.penyedia_id = users.id GROUP by rating.penyedia_id)as t'),'t.penyedia_id', '=', 'users.id')
-        ->select( 'users.gambar as gambaruser','users.alamat','t.penyedia_id as penyediaid','paket.id', 'paket.nama_paket as nama', 'users.nama as penyedia', 'paket.detail', 'paket.harga', 'paket.status',
-        \DB::raw('SUBSTRING(no_hp, 2, 20) as no'), 'paket.gambar', \DB::raw('case
+        ->join('indonesia_cities', 'indonesia_cities.id', '=', 'users.kota')
+        ->join('indonesia_districts', 'indonesia_districts.id', '=', 'users.kecamatan')
+        ->join('indonesia_villages', 'indonesia_villages.id', '=', 'users.desa')
+        ->select( 'users.gambar as gambaruser', DB::raw('concat(indonesia_cities.name, ", ",indonesia_districts.name, " ",indonesia_villages.name, " ", users.detail_alamat) as alamat'),'t.penyedia_id as penyediaid','paket.id', 'paket.nama_paket as nama', 'users.nama as penyedia', 'paket.detail', 'paket.harga', 'paket.status',
+        \DB::raw('SUBSTRING(no_hp, 2, 20) as no'), 'paket.gambar', 'paket.min_dp as dp', \DB::raw('case
         when cast(t.totalrating/t.totaluser as decimal(10,2)) > 0 then cast(t.totalrating/t.totaluser as decimal(10,2))
         ELSE
         0
@@ -220,7 +229,7 @@ class Api extends Controller
         from pemesanan INNER JOIN paket on pemesanan.paket_id = paket.id
         INNER JOIN users on paket.penyedia_id = users.id) t'), 't.id', '=', 'pemesanan.id')
         ->where('pemesanan.pemesan_id', $id)
-        ->select('pemesanan.id', 'users.nama as pemesan','users.id as userid', 't.penyedia_id as penyediaid', 'pemesanan.tanggal_book as tanggal',
+        ->select('paket.min_dp as dp','pemesanan.id', 'users.nama as pemesan','users.id as userid', 't.penyedia_id as penyediaid', 'pemesanan.tanggal_book as tanggal',
         'paket.nama_paket as paket', 'paket.id as id_paket', 'pemesanan.lokasi', 't.nama as penyedia', 'pemesanan.status',
         'pemesanan.pembayaran', 'pemesanan.harga_paket', 'pemesanan.selesai')
         ->get();
@@ -289,7 +298,7 @@ class Api extends Controller
 
             user::where('id', $id)->update([
                 'nama' => $nama,
-                'alamat' => $alamat,
+                'detail_alamat' => $alamat,
                 'no_hp' => $no,
                 'gambar' => $name,
         ]);
@@ -304,7 +313,7 @@ class Api extends Controller
 
             user::where('id', $id)->update([
                 'nama' => $nama,
-                'alamat' => $alamat,
+                'detail_alamat' => $alamat,
                 'no_hp' => $no,
         ]);
         }

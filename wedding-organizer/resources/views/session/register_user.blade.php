@@ -1,7 +1,6 @@
 @extends('layouts.user_type.guest')
 
 @section('content')
-
 <section class="min-vh-100 mb-8">
     <div class="page-header align-items-start min-vh-50 pt-5 pb-11 mx-3 border-radius-lg"
         style="background-image: url('../assets/img/logins.png');">
@@ -50,13 +49,15 @@
                             </div>
                             <div class="mb-3">
                                 <label for="gambar">Alamat</label>
-                                <input type="text" class="form-control" placeholder="Jl./Gg." name="jl" id="jl">
+                                {!! Form::select('kota', $kota, '$kota', [
+                                'class' => 'form-control',
+                                'placeholder' => 'Pilih Kota',
+                                'id' => 'kota_id'
+                                ]) !!}
+                                <div class="" id="kec"></div>
+                                <div class="" id="desa"></div>
                                 <br>
-                                <input type="text" class="form-control" placeholder="Desa/Kelurahan" name="desa" id="desa" >
-                                <br>
-                                <input type="text" class="form-control" placeholder="Kecamatan" name="kec" id="kec" >
-                                <br>
-                                <input type="text" class="form-control" placeholder="Kota" name="kota" id="kota">
+                                <input type="text" class="form-control" placeholder="Masukan Detail Alamat" name="jl" id="jl">
                                 @error('alamat')
                                 <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                 @enderror
@@ -70,6 +71,13 @@
                             </div>
                             <div class="mb-3" hidden>
                                 <input type="text" class="form-control" value="3" name="role_id" id="role_id">
+                            </div>
+                            <div class="mb-3" hidden>
+                                <label for="desc">Deskripsi</label><br>
+                                <textarea name="desc" id="desc" cols="31" rows="10" value="">--</textarea>
+                                @error('desc')
+                                <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label for="gambar">Foto Profil</label>
@@ -87,5 +95,39 @@
         </div>
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script>
+        $(document).ready(function() {
+            $('body').on('change', '#kota_id', function() {
+                let id = $(this).val();
+                let route = "{{ $route_get_kecamatan }}";
+                $.ajax({
+                    type: 'get',
+                    url: route,
+                    data: {
+                        kota_id: id
+                    },
+                    success: function(data) {
+                        $('#kec').html(data);
+                    }
+                })
+            })
+        })
 
+        $('body').on('change', '#kecamatan_id', function() {
+                let id = $(this).val();
+                let route = "{{ $route_get_desa }}";
+                $.ajax({
+                    type: 'get',
+                    url: route,
+                    data: {
+                        kecamatan_id: id
+                    },
+                    success: function(data) {
+                        $('#desa').html(data);
+                    }
+                })
+            })
+        
+    </script>
 @endsection

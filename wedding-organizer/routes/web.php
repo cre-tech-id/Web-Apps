@@ -14,6 +14,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\EventController;
+use App\Models\Event;
+use App\Models\Paket;
+use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use App\Models\User;
@@ -48,11 +51,19 @@ Route::group(['middleware' => 'auth'], function () {
         } else {
             session()->regenerate();
             $role = '2';
-            $admin = User::where('role_id', '1')->count();
-            $penyedia = User::where('role_id', '2')->count();
-            $user = User::where('role_id', '3')->count();
-            $paket = DB::table('paket')->count();
-            return view('dashboard_user_type/dashboard_penyedia', compact('admin', 'penyedia', 'user', 'paket', 'role'));
+            $event = Event::where('penyedia_id', Session::get('id'))->count();
+            $pemesanan = DB::table('pemesanan')
+            ->join('paket', 'pemesanan.paket_id', '=', 'paket.id')
+            ->join('users', 'pemesanan.pemesan_id', '=', 'users.id')
+            ->join(DB::raw('(select pemesanan.*, paket.nama_paket, paket.penyedia_id,
+                    users.nama
+                    from pemesanan INNER JOIN paket on pemesanan.paket_id = paket.id
+                    INNER JOIN users on paket.penyedia_id = users.id) t'), 't.id', '=', 'pemesanan.id')
+            ->where('paket.penyedia_id', Session::get('id'))
+            ->select('pemesanan.*', 'paket.nama_paket', 'paket.penyedia_id', 'users.nama as nama_pemesan', 'users.no_hp', 't.nama as nama_penyedia')
+            ->count();
+            $paket = Paket::where('penyedia_id', Session::get('id'))->count();
+            return view('dashboard_user_type/dashboard_penyedia', compact('pemesanan', 'event', 'paket', 'role'));
         }
     })->middleware(['auth', 'is_verify'])->name('dashboard');
 
@@ -124,6 +135,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::group(['middleware' => 'guest'], function () {
+    Route::get('getkecamatan', [RegisterController::class, 'getKecamatan'])->name('get.kecamatan');
+    Route::get('getdesa', [RegisterController::class, 'getDesa'])->name('get.desa');
     Route::get('/register', [RegisterController::class, 'create']);
     Route::post('/register', [RegisterController::class, 'store']);
     Route::get('/registeruser', [RegisterController::class, 'userRegister']);

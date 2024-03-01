@@ -12,6 +12,7 @@
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.6",
+        "laravelcollective/html": "^6.4",
         "laravolt/indonesia": "^0.34.0"
     },
     "require-dev": {

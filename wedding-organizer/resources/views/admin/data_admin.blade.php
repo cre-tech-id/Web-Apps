@@ -11,7 +11,7 @@
                         <div>
                             <h5 class="mb-0">Data Admin</h5>
                         </div>
-                        <a href="{{ route('tambah_admin') }}" class="btn bg-gradient-primary btn-sm mb-0" type="button">+&nbsp; New User</a>
+                        <a href="{{ route('tambah_admin') }}" class="btn bg-gradient-primary btn-sm mb-0" type="button">+&nbsp; New Admin</a>
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -50,7 +50,7 @@
                                         </span>
                                     </td>
                                 </tr>
-                                @endforeach    
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -59,5 +59,5 @@
         </div>
     </div>
 </div>
- 
+
 @endsection

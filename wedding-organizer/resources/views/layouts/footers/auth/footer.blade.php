@@ -6,7 +6,7 @@
                     Copyright © <script>
                     document.write(new Date().getFullYear())
                     </script>
-                    <a style="color: #252f40;" href="#" class="font-weight-bold ml-1">Velda</a>
+                    <a style="color: #252f40;" href="#" class="font-weight-bold ml-1">Cretech</a>
                 </div>
             </div>
         </div>

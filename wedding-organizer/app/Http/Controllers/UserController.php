@@ -11,7 +11,13 @@ class UserController extends Controller
 
     public function dataUser()
     {
-        $user = DB::table('users')->where('role_id','3')->get();
+        $user = DB::table('users')
+        ->select('users.id','users.nama', 'users.is_verify', 'users.email', 'users.no_hp', 'users.gambar', 'users.desc', DB::raw('concat(indonesia_cities.name, ", ",indonesia_districts.name, " ",indonesia_villages.name, " ", users.detail_alamat) as alamat') )
+        ->join('indonesia_cities', 'indonesia_cities.id', '=', 'users.kota')
+        ->join('indonesia_districts', 'indonesia_districts.id', '=', 'users.kecamatan')
+        ->join('indonesia_villages', 'indonesia_villages.id', '=', 'users.desa')
+        ->where('users.role_id', 3)
+        ->get();
  
         return view('user.data_user',['user' => $user]);
     }
