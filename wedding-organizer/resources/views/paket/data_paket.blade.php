@@ -18,22 +18,22 @@
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
+                        <table class="mt-4" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-4">
+                                    <th style="width:15%;" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-4">
                                         Nama Paket
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                    <th style="width:50%;" class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                         Detail
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                    <th style="width:15%;" class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                         Harga
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                    <th style="width:10%;" class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                         Status
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                    <th style="width:20%;" class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                         Action
                                     </th>
                                 </tr>

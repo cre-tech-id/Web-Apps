@@ -467,17 +467,20 @@ class Api extends Controller
                 'nominal' => $nominal,
                 'bukti' => $name,
                 ]);
-            
+
             Pemesanan::where('id', $pemesanan_id)->update([
                 'pembayaran' => $pembayaran,
-            ]);        
-        }
+            ]);
 
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Success add data',
-        ], 200);
+            return response()->json([
+                'success' => true,
+                'message' => 'Success add data',
+            ], 200);
+        }else
+            return response()->json([
+                'success' => false,
+                'message' => 'Add file first',
+            ], 200);
         }
     }
 
