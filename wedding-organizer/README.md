@@ -29,7 +29,7 @@
 
 ### About
 
-Wedding Organizer is web application designed to serve as a platform for wedding organizer. The website features an admin dashboard for monitoring user data and data inputted by wedding organizer providers. Additionally, there's a provider dashboard to process wedding organizer package data, order data, and event data. The data entered by the wedding organizer providers will be displayed on the associated <a href="https://github.com/cre-tech-id/Mobile-Apps/tree/master/Wedding-Oraganizer">Mobile Wedding Organizer</a>.
+Wedding Organizer is web application designed to serve as a platform for wedding organizer. The website features an admin dashboard for monitoring user data and data inputted by wedding organizer providers. Additionally, there's a provider dashboard to process wedding organizer package data, order data, and event data. The data entered by the wedding organizer providers will be displayed on the associated <a href="https://github.com/Jundix/wedding_organizer_mobile">Mobile Wedding Organizer</a>.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -105,6 +105,69 @@ Login Page contain 2 field, Email and Password. Which is email and password must
 * Admin - Event
   This page is only show events event to be held by Wedding Organizer.
   ![image](https://github.com/cre-tech-id/Web-Apps/assets/56110716/ed19b20f-19b4-43b3-9a97-86dba72d1df3)
+
+* Admin - Pemesanan(order)
+  This page contains information of customer order and the confirmation order from wedding organizer.
+  ![image](https://github.com/Jundix/wedding_organizer/assets/56110716/e01fc32a-e43b-4d74-9885-6e919a342f17)
+
+* Admin - Komentar(comments)
+  This page contains feedback(comments) of customer. If there is an inappropriate word admin can delete the comments. Just click trash icon to delete comment.
+  ![image](https://github.com/Jundix/wedding_organizer/assets/56110716/1e0077f6-bb79-41b7-a567-4b68a9467efc)
+
+
+* Wedding Organizer - Paket(package)
+  This page contains packages that have been inputed by the wedding organizer. Wedding Organizer can add, delete, and update data. Also in this page there is also feature that wedding organizer can manage package status, whether the package is open or close.
+  ![image](https://github.com/Jundix/wedding_organizer/assets/56110716/2f9f8a08-f607-418b-9b06-b758c7b53b6b)
+  
+* Wedding Organizer - Add Paket
+  Above table that contain package data, there is button add data. If wedding organizer want to add data just click the button and fill the form for insert data package. And then click button "Simpan" to save data.
+  ![image](https://github.com/Jundix/wedding_organizer/assets/56110716/738ac4b4-7a14-4395-8fd3-14b53c9731c2)
+  
+* Wedding Organizer - Update Paket
+  In column action from package table there is edit icon which is serves to update data. If wedding organizer want to updata data, just click the icon and update data package that wedding organizer want to. And click button "Simpan" to save data.
+  ![image](https://github.com/Jundix/wedding_organizer/assets/56110716/b4b1d491-4c86-47fd-b754-c7415091948c)
+  
+* Wedding Organizer - Delete Paket
+  To delete data paket just choose data that Wedding Organizer want to delete by click the trash icon next to update icon, that located in Wedding Organizer - Paket.
+
+* Wedding Organizer - Pemesanan(order)
+  This page contains information of customer order, also in this page there is button for accept or reject order. For accept order just click button "Terima" and for reject click button "Tolak".
+  ![image](https://github.com/Jundix/wedding_organizer/assets/56110716/e01fc32a-e43b-4d74-9885-6e919a342f17)
+  
+* Wedding Organizer - Event
+  This page contains Event that have been inputed by the wedding organizer. Wedding Organizer can add, delete, and update data.
+  ![image](https://github.com/Jundix/wedding_organizer/assets/56110716/ca39b4ed-bf5b-41da-96a6-e78a4c4e34fa)
+  
+* Wedding Organizer - Add Event
+  Above table that contains event, there is button add data. If wedding organizer want to add data just click the button and fill the form for insert data event. And then click button "Simpan Data" to save data.
+  ![image](https://github.com/Jundix/wedding_organizer/assets/56110716/0273433b-9b7b-45ad-9c21-312c4eb7e9ee)
+  
+* Wedding Organizer - Update Event
+  In column action from package table there is edit icon which is serves to update data. If wedding organizer want to updata data, just click the icon and update data event that wedding organizer want to. And click button "Simpan" to save data.
+  ![image](https://github.com/Jundix/wedding_organizer/assets/56110716/4eba6e24-eeb5-488a-a80e-25237b7b9dda)
+
+* Wedding Organizer - Delete Event
+  To delete data event just choose data that user want to delete by click the trash icon next to update icon, that located in Wedding Organizer - Event.
+
+* Wedding Organizer - Pembayaran(payments)
+  This page contains payments data which has been done by customers. Also this page contain button to view proof of payment, because still using manual payment method.
+  ![image](https://github.com/Jundix/wedding_organizer/assets/56110716/20c57a8e-0681-4822-91ce-33408103fc2c)
+
+* Wedding Organizer - Payment proof
+  This page contains detail of payment proof like date and transfer receipt.
+  ![image](https://github.com/Jundix/wedding_organizer/assets/56110716/ba890618-931c-445b-a3ea-1e1b0cc247d2)
+
+* Wedding Organizer - Komentar(comments)
+  After order completion and agenda is done, customer can give feedback about service of wedding organizer. And the feedback(comment) appear on this page.
+  ![image](https://github.com/Jundix/wedding_organizer/assets/56110716/7f69e15c-5cb0-4285-b7e6-3db03821a185)
+
+
+
+    
+
+
+
+
 
 
 
