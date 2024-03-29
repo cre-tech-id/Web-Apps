@@ -20,32 +20,30 @@ class Api extends Controller
     public function penyedia()
     {
         $penyedia = DB::table('users')
-        ->join(DB::raw('(select rating.penyedia_id, cast(sum(rating.rating)-5 as decimal(10,1))
-        as totalrating, count(rating.rating)-1 as totaluser from rating inner join users on
-        rating.penyedia_id = users.id GROUP by rating.penyedia_id)as t'),'t.penyedia_id', '=', 'users.id')
+        ->leftJoin('rating', 'users.id', '=', 'rating.penyedia_id')
         ->join('indonesia_cities', 'indonesia_cities.id', '=', 'users.kota')
         ->join('indonesia_districts', 'indonesia_districts.id', '=', 'users.kecamatan')
         ->join('indonesia_villages', 'indonesia_villages.id', '=', 'users.desa')
-        ->select('users.nama as penyedia', DB::raw('concat(indonesia_cities.name, ", ",indonesia_districts.name, " ",indonesia_villages.name, " ", users.detail_alamat) as alamat'), \DB::raw('SUBSTRING(no_hp, 2, 20) as no'), \DB::raw('case
-        when cast(t.totalrating/t.totaluser as decimal(10,2)) > 0 then cast(t.totalrating/t.totaluser as decimal(10,2))
-        ELSE
-        0
-        end as totalrating'), \DB::raw('case
-        when t.totalrating/t.totaluser BETWEEN 0 and 0.4 then 0
-        when t.totalrating/t.totaluser BETWEEN 0.5 and 0.9 then 0.5
-        when t.totalrating/t.totaluser BETWEEN 1 and 1.4 then 1
-        when t.totalrating/t.totaluser BETWEEN 1.5 and 1.9 then 1.5
-        when t.totalrating/t.totaluser BETWEEN 2 and 2.4 then 2
-        when t.totalrating/t.totaluser BETWEEN 2.5 and 2.9 then 2.5
-        when t.totalrating/t.totaluser BETWEEN 3 and 3.4 then 3
-        when t.totalrating/t.totaluser BETWEEN 3.5 and 3.9 then 3.5
-        when t.totalrating/t.totaluser BETWEEN 4 and 4.4 then 4
-        when t.totalrating/t.totaluser BETWEEN 4.5 and 5 then 4.5
-        when t.totalrating/t.totaluser BETWEEN 5 and 6 then 5
-        ELSE
-        0
+        ->where('users.role_id','2')
+        ->groupBy('users.id')
+        ->select('users.nama as penyedia', DB::raw('concat(indonesia_cities.name, ", ",indonesia_districts.name, " ",indonesia_villages.name, " ", users.detail_alamat) as alamat'),DB::raw('SUBSTRING(no_hp, 2, 20) as no'),
+        \DB::raw('case
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) is null then 0
+        else cast(SUM(rating.rating)/count(rating) as decimal(10,2)) end as totalrating'),
+        \DB::raw('CASE
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) is null then 0
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 0 and 0.4 then 0
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 0.5 and 0.9 then 0.5
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 1 and 1.4 then 1
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 1.5 and 1.9 then 1.5
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 2 and 2.4 then 2
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 2.5 and 2.9 then 2.5
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 3 and 3.4 then 3
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 3.5 and 3.9 then 3.5
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 4 and 4.4 then 4
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 4.5 and 4.9 then 4.5
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 5 and 6 then 5
         end as ratingbulat'), 'users.gambar')
-        ->where('role_id', '=', '2')
         ->get();
         return response()->json([
             'success' => true,
@@ -146,41 +144,48 @@ class Api extends Controller
     }
 
     public function user($id){
+        $user = DB::table('users')
+        ->join('indonesia_cities', 'indonesia_cities.id', '=', 'users.kota')
+        ->join('indonesia_districts', 'indonesia_districts.id', '=', 'users.kecamatan')
+        ->join('indonesia_villages', 'indonesia_villages.id', '=', 'users.desa')
+        ->where('users.id', $id)
+        ->select('users.*', 'indonesia_cities.name as nama_kota', 'indonesia_districts.name as nama_kecamatan', 'indonesia_villages.name as nama_kelurahan')
+        ->get();
         return response()->json([
             'success' => true,
             'message' => 'fetch single data',
-            'data' => [User::find($id)]
+            'data' => $user
         ]);
     }
 
     public function paket(){
-        $paket = DB::table('paket')
-        ->join('users', 'users.id', '=', 'paket.penyedia_id')
-        ->join(DB::raw('(select rating.penyedia_id, cast(sum(rating.rating)-5 as decimal(10,1))
-        as totalrating, count(rating.rating)-1 as totaluser from rating inner join users on
-        rating.penyedia_id = users.id GROUP by rating.penyedia_id)as t'),'t.penyedia_id', '=', 'users.id')
+        $paket = DB::table('users')
+        ->leftJoin('rating', 'users.id', '=', 'rating.penyedia_id')
+        ->join('paket', 'paket.penyedia_id', '=','users.id')
         ->join('indonesia_cities', 'indonesia_cities.id', '=', 'users.kota')
         ->join('indonesia_districts', 'indonesia_districts.id', '=', 'users.kecamatan')
         ->join('indonesia_villages', 'indonesia_villages.id', '=', 'users.desa')
-        ->select( 'users.gambar as gambaruser', DB::raw('concat(indonesia_cities.name, ", ",indonesia_districts.name, " ",indonesia_villages.name, " ", users.detail_alamat) as alamat'),'t.penyedia_id as penyediaid','paket.id', 'paket.nama_paket as nama', 'users.nama as penyedia', 'paket.detail', 'paket.harga', 'paket.status',
-        \DB::raw('SUBSTRING(no_hp, 2, 20) as no'), 'paket.gambar', 'paket.min_dp as dp', \DB::raw('case
-        when cast(t.totalrating/t.totaluser as decimal(10,2)) > 0 then cast(t.totalrating/t.totaluser as decimal(10,2))
-        ELSE
-        0
-        end as totalrating'), \DB::raw('case
-        when t.totalrating/t.totaluser BETWEEN 0 and 0.4 then 0
-        when t.totalrating/t.totaluser BETWEEN 0.5 and 0.9 then 0.5
-        when t.totalrating/t.totaluser BETWEEN 1 and 1.4 then 1
-        when t.totalrating/t.totaluser BETWEEN 1.5 and 1.9 then 1.5
-        when t.totalrating/t.totaluser BETWEEN 2 and 2.4 then 2
-        when t.totalrating/t.totaluser BETWEEN 2.5 and 2.9 then 2.5
-        when t.totalrating/t.totaluser BETWEEN 3 and 3.4 then 3
-        when t.totalrating/t.totaluser BETWEEN 3.5 and 3.9 then 3.5
-        when t.totalrating/t.totaluser BETWEEN 4 and 4.4 then 4
-        when t.totalrating/t.totaluser BETWEEN 4.5 and 5 then 4.5
-        when t.totalrating/t.totaluser BETWEEN 5 and 6 then 5
-        ELSE
-        0
+        ->where('users.role_id','2')
+        ->groupBy('paket.id')
+        ->select('users.gambar', DB::raw('concat(indonesia_cities.name, ", ",indonesia_districts.name, " ",indonesia_villages.name, " ", users.detail_alamat) as alamat'),
+        'users.id as penyediaid', 'paket.id','paket.nama_paket as nama','users.nama as penyedia','paket.detail',
+        'paket.harga', 'paket.status', DB::raw('SUBSTRING(no_hp, 2, 20) as no'),'paket.gambar','paket.min_dp as dp',
+        \DB::raw('case
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) is null then 0
+        else cast(SUM(rating.rating)/count(rating) as decimal(10,2)) end as totalrating'),
+        \DB::raw('CASE
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) is null then 0
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 0 and 0.4 then 0
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 0.5 and 0.9 then 0.5
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 1 and 1.4 then 1
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 1.5 and 1.9 then 1.5
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 2 and 2.4 then 2
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 2.5 and 2.9 then 2.5
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 3 and 3.4 then 3
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 3.5 and 3.9 then 3.5
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 4 and 4.4 then 4
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 4.5 and 4.9 then 4.5
+        when cast(SUM(rating.rating)/count(rating) as decimal(10,2)) BETWEEN 5 and 6 then 5
         end as ratingbulat'))
         ->get();
         return response()->json([
@@ -232,6 +237,7 @@ class Api extends Controller
         ->select('paket.min_dp as dp','pemesanan.id', 'users.nama as pemesan','users.id as userid', 't.penyedia_id as penyediaid', 'pemesanan.tanggal_book as tanggal',
         'paket.nama_paket as paket', 'paket.id as id_paket', 'pemesanan.lokasi', 't.nama as penyedia', 'pemesanan.status',
         'pemesanan.pembayaran', 'pemesanan.harga_paket', 'pemesanan.selesai')
+        ->orderBy('pemesanan.id','DESC')
         ->get();
         if($pesanan->isEmpty()){
             return response()->json([
@@ -291,13 +297,19 @@ class Api extends Controller
             $data = $request->data;
             $json_data = json_decode($data, true);
 
-            $id = $json_data['id_user'];
-            $nama = $json_data['nama_user'];
-            $alamat = $json_data['alamat_user'];
-            $no = $json_data['no_user'];
+            $id = $json_data['id'];
+            $nama = $json_data['nama'];
+            $kota = DB::table('indonesia_cities')->where('name', $json_data['kota'])->first();
+            $kecamatan = DB::table('indonesia_districts')->where('name', $json_data['kecamatan'])->first();
+            $kelurahan = DB::table('indonesia_villages')->where('name', $json_data['kelurahan'])->first();
+            $alamat = $json_data['alamat'];
+            $no = $json_data['no'];
 
             user::where('id', $id)->update([
                 'nama' => $nama,
+                'kota' => $kota->id,
+                'kecamatan' => $kecamatan->id,
+                'desa' => $kelurahan->id,
                 'detail_alamat' => $alamat,
                 'no_hp' => $no,
                 'gambar' => $name,
@@ -306,13 +318,19 @@ class Api extends Controller
             $data = $request->data;
             $json_data = json_decode($data, true);
 
-            $id = $json_data['id_user'];
-            $nama = $json_data['nama_user'];
-            $alamat = $json_data['alamat_user'];
-            $no = $json_data['no_user'];
+            $id = $json_data['id'];
+            $nama = $json_data['nama'];
+            $kota = DB::table('indonesia_cities')->where('name', $json_data['kota'])->first();
+            $kecamatan = DB::table('indonesia_districts')->where('name', $json_data['kecamatan'])->first();
+            $kelurahan = DB::table('indonesia_villages')->where('name', $json_data['kelurahan'])->first();
+            $alamat = $json_data['alamat'];
+            $no = $json_data['no'];
 
             user::where('id', $id)->update([
                 'nama' => $nama,
+                'kota' => $kota->id,
+                'kecamatan' => $kecamatan->id,
+                'desa' => $kelurahan->id,
                 'detail_alamat' => $alamat,
                 'no_hp' => $no,
         ]);
@@ -320,7 +338,7 @@ class Api extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => $id,
+            'message' => "Sukses Update Profil",
         ], 200);
         }
 
@@ -412,6 +430,13 @@ class Api extends Controller
 
     public function getprovinsi(){
         $provinsi = DB::table('indonesia_provinces')->get();
+        return response()->json([
+            'provinsi' => $provinsi
+        ]);
+    }
+
+    public function getprovinsiid(){
+        $provinsi = DB::table('indonesia_provinces')->where('id','13')->get();
         return response()->json([
             'provinsi' => $provinsi
         ]);

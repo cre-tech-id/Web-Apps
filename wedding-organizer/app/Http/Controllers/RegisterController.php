@@ -64,11 +64,6 @@ class RegisterController extends Controller
         }
         $user = User::create($attributes);
 
-        $rating = new Rating();
-        $rating->users_id = '1';
-        $rating->penyedia_id = $user->id;
-        $rating->rating = '5';
-        $rating->save();
         session()->flash('success', 'Akun sukses dibuat, tunggu admin mengkonfirmasi akun anda untuk bisa login!!!');
         return redirect('login');
     }

@@ -44,7 +44,6 @@ class PaketController extends Controller
         $paket->status = 'Open';
         $paket->save();
 
-        Rating::where('rating', 0)->delete();
         return redirect('/paket');
     }
 

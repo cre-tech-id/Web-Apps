@@ -34,6 +34,7 @@ Route::get('/komentar/{id}', [Api::class, 'komentar']);
 Route::post('/postkomentar', [Api::class, 'postKomentar']);
 Route::get('/getkota/{provinsi}', [Api::class, 'getKota']);
 Route::get('/getprovinsi', [Api::class, 'getProvinsi']);
+Route::get('/getprovinsiid', [Api::class, 'getProvinsiid']);
 Route::get('/getkecamatan/{kota}', [Api::class, 'getKecamatan']);
 Route::get('/getkelurahan/{kecamatan}', [Api::class, 'getKelurahan']);
 Route::get('/listpembayaran/{id}', [Api::class, 'listPembayaran']);

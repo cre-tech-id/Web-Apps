@@ -63,12 +63,22 @@ class PemesananController extends Controller
 
     public function dataPembayaran()
     {
-        $pemesanan = DB::table('pemesanan')
+        if (Session::get('role') == '2') {
+            $pemesanan = DB::table('pemesanan')
+            ->join('users', 'users.id', '=', 'pemesanan.pemesan_id')
+            ->join('paket', 'paket.id', '=', 'pemesanan.paket_id')
+            ->select('pemesanan.id','users.nama', 'paket.nama_paket', 'pemesanan.pembayaran', 'pemesanan.harga_paket')
+            ->where('paket.penyedia_id', Session::get('id'))
+            ->get();
+        return view('pemesanan.pembayaran', compact('pemesanan'));
+        }else{
+            $pemesanan = DB::table('pemesanan')
             ->join('users', 'users.id', '=', 'pemesanan.pemesan_id')
             ->join('paket', 'paket.id', '=', 'pemesanan.paket_id')
             ->select('pemesanan.id','users.nama', 'paket.nama_paket', 'pemesanan.pembayaran', 'pemesanan.harga_paket')
             ->get();
         return view('pemesanan.pembayaran', compact('pemesanan'));
+        }
     }
 
     public function detailPembayaran($id)
