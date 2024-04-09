@@ -29,7 +29,7 @@
 
 ### About
 
-Wedding Organizer is web application designed to serve as a platform for wedding organizer. The website features an admin dashboard for monitoring user data and data inputted by wedding organizer providers. Additionally, there's a provider dashboard to process wedding organizer package data, order data, and event data. The data entered by the wedding organizer providers will be displayed on the associated <a href="https://github.com/Jundix/wedding_organizer_mobile">Mobile Wedding Organizer</a>.
+Wedding Organizer is web application designed to serve as a platform for wedding organizer. The website features an admin dashboard for monitoring user data and data inputted by wedding organizer providers. Additionally, there's a provider dashboard to process wedding organizer package data, order data, and event data. The data entered by the wedding organizer providers will be displayed on the associated <a href="https://github.com/cre-tech-id/Mobile-Apps/tree/master/Wedding-Oraganizer">Mobile Wedding Organizer</a>.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
