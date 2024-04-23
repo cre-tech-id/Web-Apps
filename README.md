@@ -70,6 +70,9 @@ Medis Web Apps is a simple web application that allows users to manage informati
 ## Pembayaran PAM
 
 ### About Pembayaran PAM
+
+Pembayaran PAM is a comprehensive platform designed to streamline the process of managing customer data and facilitating bill payments using Midtrans for water utility services. With a user-friendly interface and powerful administrative dashboard, this website offers convenience and efficiency for both administrators and users.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- End Pembayaran PAM Section -->
